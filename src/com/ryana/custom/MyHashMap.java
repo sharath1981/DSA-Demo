@@ -78,7 +78,7 @@ public class MyHashMap<K, V> {
         return Objects.hashCode(key) % initialCapacity;
     }
 
-    static final class Entry<K, V> {
+    private static final class Entry<K, V> {
         private final K key;
         private V value;
         private Entry<K, V> next;
@@ -86,11 +86,6 @@ public class MyHashMap<K, V> {
         public Entry(final K key, final V value) {
             this.key = key;
             this.value = value;
-        }
-
-        public Entry(final K key, final V value, final Entry<K, V> next) {
-            this(key, value);
-            this.next = next;
         }
 
         public K getKey() {
