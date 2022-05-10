@@ -1,5 +1,6 @@
 package com.ryana.custom;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -74,6 +75,18 @@ public class MyHashMap<K, V> {
 
     }
 
+    public void printAll() {
+        if (size == 0) {
+            throw new RuntimeException(" Empty Hashmap...");
+        }
+        for (var entry : bucket) {
+            while (Objects.nonNull(entry)) {
+                System.out.println(entry);
+                entry = entry.getNext();
+            }
+        }
+    }
+
     private int indexOf(final K key) {
         return Objects.hashCode(key) % initialCapacity;
     }
@@ -107,5 +120,11 @@ public class MyHashMap<K, V> {
         public void setNext(final Entry<K, V> next) {
             this.next = next;
         }
+
+        @Override
+        public String toString() {
+            return "Entry [key=" + key + ", value=" + value + "]";
+        }
+
     }
 }

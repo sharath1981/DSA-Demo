@@ -13,16 +13,17 @@ public class App {
         map.put(null, 7);
         map.put("E", null);
 
-        System.out.println(map.size());
-        System.out.println(map.get("AaAa"));
-        System.out.println(map.get("BBBB"));
-        System.out.println(map.get("AaBB"));
-        System.out.println(map.get("BBAa"));
-        System.out.println(map.get(null));
-        System.out.println(map.get("xx"));
-        System.out.println(map.remove("AaAa"));
-        System.out.println(map.remove("D"));
-        System.out.println(map.size());
+        // System.out.println(map.size());
+        map.printAll();
+        // System.out.println(map.get("AaAa"));
+        // System.out.println(map.get("BBBB"));
+        // System.out.println(map.get("AaBB"));
+        // System.out.println(map.get("BBAa"));
+        // System.out.println(map.get(null));
+        // System.out.println(map.get("xx"));
+        // System.out.println(map.remove("AaAa"));
+        // System.out.println(map.remove("D"));
+        // System.out.println(map.size());
 
     }
 }
