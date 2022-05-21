@@ -89,14 +89,6 @@ public class LRUCache<K, V> {
             this.value = value;
         }
 
-        public Node(final Node<K, V> previous, final K key, final V value) {
-            this(key, value);
-            this.previous = previous;
-            if (Objects.nonNull(previous)) {
-                previous.setNext(this);
-            }
-        }
-
         public Node(final K key, final V value, final Node<K, V> next) {
             this(key, value);
             this.next = next;
