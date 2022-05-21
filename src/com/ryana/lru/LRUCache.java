@@ -33,7 +33,6 @@ public class LRUCache<K, V> {
         if (isFull()) {
             cache.remove(tail.getKey());
             deleteNode(tail);
-
         }
         if (Objects.nonNull(cache.get(key))) {
             deleteNode(cache.get(key));
@@ -50,17 +49,19 @@ public class LRUCache<K, V> {
     }
 
     private Node<K, V> deleteNode(final Node<K, V> node) {
-        final var prev = node.getPrevious();
-        final var next = node.getNext();
-        if (Objects.nonNull(prev)) {
-            prev.setNext(next);
-        } else {
-            head = next;
-        }
-        if (Objects.nonNull(next)) {
-            next.setPrevious(prev);
-        } else {
-            tail = prev;
+        if (Objects.nonNull(node)) {
+            final var prev = node.getPrevious();
+            final var next = node.getNext();
+            if (Objects.nonNull(prev)) {
+                prev.setNext(next);
+            } else {
+                head = next;
+            }
+            if (Objects.nonNull(next)) {
+                next.setPrevious(prev);
+            } else {
+                tail = prev;
+            }
         }
         return node;
     }
