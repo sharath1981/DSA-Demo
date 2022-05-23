@@ -25,7 +25,7 @@ public class LRUCache<K, V> {
         return cache.size();
     }
 
-    public Map<K, Node<K, V>> getCache() {
+    private Map<K, Node<K, V>> getCache() {
         return cache;
     }
 
@@ -34,9 +34,7 @@ public class LRUCache<K, V> {
             cache.remove(tail.getKey());
             deleteNode(tail);
         }
-        if (Objects.nonNull(cache.get(key))) {
-            deleteNode(cache.get(key));
-        }
+        deleteNode(cache.get(key));
         cache.put(key, addFirst(key, value));
     }
 
