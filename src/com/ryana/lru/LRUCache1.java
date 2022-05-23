@@ -1,7 +1,7 @@
 package com.ryana.lru;
 
 import java.util.LinkedHashMap;
-import java.util.Objects;
+import java.util.Optional;
 
 public class LRUCache1<K, V> {
     private int capacity;
@@ -13,21 +13,19 @@ public class LRUCache1<K, V> {
     }
 
     public V get(final K key) {
-        final var value = cache.get(key);
-        if (Objects.nonNull(value)) {
-            put(key, value);
-        }
-        return value;
+        return Optional.ofNullable(cache.get(key))
+                .map(value -> put(key, value))
+                .orElse(null);
     }
 
-    public void put(final K key, final V value) {
+    public V put(final K key, final V value) {
         if (capacity == cache.size()) {
             final var it = cache.keySet().iterator();
             it.next();
             it.remove();
         }
         cache.remove(key);
-        cache.put(key, value);
+        return cache.put(key, value);
     }
 
     private LinkedHashMap<K, V> getCache() {
@@ -41,6 +39,7 @@ public class LRUCache1<K, V> {
         lru.put(3, 3);
         lru.get(1);
         lru.put(4, 4);
+        lru.get(2);
         lru.put(5, 5);
 
         System.out.println(lru.getCache());
