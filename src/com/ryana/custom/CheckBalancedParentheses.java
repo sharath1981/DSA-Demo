@@ -8,6 +8,7 @@ public class CheckBalancedParentheses {
     public static void main(final String[] args) {
         final var str = "{[{([{}[]()])}]}";
 
+        System.out.println(isBalanced1(str));
         System.out.println(isBalanced2(str));
 
     }
@@ -25,15 +26,7 @@ public class CheckBalancedParentheses {
     }
 
     private static boolean isValid(final String str) {
-        if (Objects.nonNull(str) && !str.isBlank() && str.length() % 2 == 0) {
-            for (final var ch : str.toCharArray()) {
-                if (!(ch == '(' || ch == ')' || ch == '{' || ch == '}' || ch == '[' || ch == ']')) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+        return !(Objects.isNull(str) || str.isBlank() || str.length() % 2 != 0);
     }
 
     private static boolean isBalanced2(final String str) {
