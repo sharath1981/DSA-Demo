@@ -22,6 +22,10 @@ public class MyHashMap<K, V> {
         return size;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public void put(final K key, final V value) {
         final int index = indexOf(key);
         final var entry = bucket[index];
@@ -43,7 +47,8 @@ public class MyHashMap<K, V> {
     }
 
     public V get(final K key) {
-        final var entry = bucket[indexOf(key)];
+        final int index = indexOf(key);
+        final var entry = bucket[index];
         return Stream.iterate(entry, Objects::nonNull, Entry::getNext)
                 .filter(node -> Objects.equals(key, node.getKey()))
                 .findFirst()
@@ -71,11 +76,10 @@ public class MyHashMap<K, V> {
             }
             return null;
         }
-
     }
 
     public void printAll() {
-        if (size == 0) {
+        if (isEmpty()) {
             throw new RuntimeException(" Empty Hashmap...");
         }
         for (var entry : bucket) {
