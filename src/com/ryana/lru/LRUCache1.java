@@ -12,6 +12,10 @@ public class LRUCache1<K, V> {
         cache = new LinkedHashMap<>();
     }
 
+    public boolean isFull() {
+        return capacity == cache.size();
+    }
+
     public V get(final K key) {
         return Optional.ofNullable(cache.get(key))
                 .map(value -> put(key, value))
@@ -19,7 +23,7 @@ public class LRUCache1<K, V> {
     }
 
     public V put(final K key, final V value) {
-        if (capacity == cache.size()) {
+        if (isFull()) {
             final var it = cache.keySet().iterator();
             it.next();
             it.remove();

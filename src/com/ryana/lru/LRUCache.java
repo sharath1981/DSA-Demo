@@ -17,7 +17,7 @@ public class LRUCache<K, V> {
         cache = new HashMap<>();
     }
 
-    private boolean isFull() {
+    public boolean isFull() {
         return capacity == cache.size();
     }
 
