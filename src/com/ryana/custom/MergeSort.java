@@ -15,11 +15,11 @@ public class MergeSort {
         if (Objects.isNull(original) || original.length < 2) {
             return;
         }
-        final var leftArray = Arrays.copyOfRange(original, 0, original.length / 2);
-        final var rightArray = Arrays.copyOfRange(original, original.length / 2, original.length);
-        sort(leftArray);
-        sort(rightArray);
-        merge(original, leftArray, rightArray);
+        final var left = Arrays.copyOfRange(original, 0, original.length / 2);
+        final var right = Arrays.copyOfRange(original, original.length / 2, original.length);
+        sort(left);
+        sort(right);
+        merge(original, left, right);
     }
 
     private static void merge(final int[] original, final int[] left, final int[] right) {
