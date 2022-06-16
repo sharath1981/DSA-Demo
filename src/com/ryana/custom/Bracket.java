@@ -26,12 +26,9 @@ public class Bracket {
         final var stack = new Stack<Character>();
         final var characters = str.toCharArray();
         for (final var ch : characters) {
-            final var close = bracketMap.get(ch);
-            if (Objects.nonNull(close)) {
-                stack.push(close);
-            } else if (ch == stack.peek()) {
-                stack.pop();
-            } else {
+            if (bracketMap.containsKey(ch)) {
+                stack.push(ch);
+            } else if (stack.isEmpty() || ch != bracketMap.get(stack.pop())) {
                 return false;
             }
         }
