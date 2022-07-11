@@ -1,4 +1,4 @@
-package com.ryana.custom;
+package com.ryana.programs;
 
 import java.util.Objects;
 import java.util.Stack;
@@ -14,9 +14,18 @@ public class CheckBalancedParentheses {
     }
 
     private static boolean isBalanced1(String str) {
-        if (!isValid(str)) {
-            return false;
-        }
+        return isValid(str) && isBalancedUsingStringMethods(str);
+    }
+
+    private static boolean isBalanced2(final String str) {
+        return isValid(str) && isBalancedUsingStack(str);
+    }
+
+    private static boolean isValid(final String str) {
+        return !(Objects.isNull(str) || str.isBlank() || str.length() % 2 != 0);
+    }
+
+    private static boolean isBalancedUsingStringMethods(String str) {
         while (str.contains("()") || str.contains("{}") || str.contains("[]")) {
             str = str.replaceAll("\\(\\)", "")
                     .replaceAll("\\{\\}", "")
@@ -25,14 +34,7 @@ public class CheckBalancedParentheses {
         return str.isBlank();
     }
 
-    private static boolean isValid(final String str) {
-        return !(Objects.isNull(str) || str.isBlank() || str.length() % 2 != 0);
-    }
-
-    private static boolean isBalanced2(final String str) {
-        if (!isValid(str)) {
-            return false;
-        }
+    private static boolean isBalancedUsingStack(final String str) {
         final var stack = new Stack<Character>();
         for (final var ch : str.toCharArray()) {
             if (ch == '{' || ch == '[' || ch == '(') {

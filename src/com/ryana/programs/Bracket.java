@@ -1,4 +1,4 @@
-package com.ryana.custom;
+package com.ryana.programs;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +20,10 @@ public class Bracket {
     }
 
     private static boolean isBalanced(final String str) {
-        if (!isValid(str)) {
-            return false;
-        }
+        return isValid(str) && isBalancedUsingStack(str);
+    }
+
+    private static boolean isBalancedUsingStack(final String str) {
         final var stack = new Stack<Character>();
         final var characters = str.toCharArray();
         for (final var ch : characters) {
