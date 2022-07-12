@@ -6,24 +6,25 @@ import java.util.Objects;
 public class MergeSort {
 
     public static void main(final String[] args) {
-        final int[] original = { 9, 5, 7, 3, 8, 10, 2, 1, 6, 4, 11 };
+        final int original[] = { 9, 1, 2, 8, 14, 11, 3, 1, 7, 4, 3, 10, 14, 5, 12, 6 };
         sort(original);
         System.out.println(Arrays.toString(original));
+
     }
 
     private static void sort(final int[] original) {
         if (Objects.isNull(original) || original.length < 2) {
             return;
         }
-        final var left = Arrays.copyOfRange(original, 0, original.length / 2);
+        final var left = Arrays.copyOf(original, original.length / 2);
         final var right = Arrays.copyOfRange(original, original.length / 2, original.length);
         sort(left);
         sort(right);
-        merge(original, left, right);
+        merge1(original, left, right);
     }
 
     private static void merge(final int[] original, final int[] left, final int[] right) {
-        int k = 0, i = 0, j = 0;
+        int i = 0, j = 0, k = 0;
         while (i < left.length && j < right.length) {
             original[k++] = left[i] <= right[j] ? left[i++] : right[j++];
         }
@@ -32,6 +33,28 @@ public class MergeSort {
         }
         while (j < right.length) {
             original[k++] = right[j++];
+        }
+    }
+
+    private static void merge1(final int[] original, final int[] left, final int[] right) {
+        int i = 0, j = 0, k = 0;
+        while (i < left.length && j < right.length) {
+            original[k++] = left[i] <= right[j] ? left[i++] : right[j++];
+        }
+        System.arraycopy(left, i, original, k, left.length - i);
+        System.arraycopy(right, j, original, k, right.length - j);
+    }
+
+    private static void merge2(final int[] original, final int[] left, final int[] right) {
+        int i = 0, j = 0, k = 0;
+        while (k < original.length) {
+            if (i < left.length && j < right.length) {
+                original[k++] = left[i] <= right[j] ? left[i++] : right[j++];
+            } else if (i < left.length) {
+                original[k++] = left[i++];
+            } else if (j < right.length) {
+                original[k++] = right[j++];
+            }
         }
     }
 }
