@@ -1,6 +1,7 @@
 package com.ryana.ds;
 
 import java.util.Objects;
+import java.util.Stack;
 import java.util.stream.Stream;
 
 public class SinglyLinkedList<T> {
@@ -29,14 +30,14 @@ public class SinglyLinkedList<T> {
     public void addTail(T data) {
         if (isEmpty()) {
             addHead(data);
-            return; 
+            return;
         }
         Stream.iterate(head, Objects::nonNull, Node::getNext)
-              .skip(size-1)
-              .findFirst()
-              .ifPresent(node -> {
-                  node.setNext(new Node(data));
-                  size++;
+                .skip(size - 1)
+                .findFirst()
+                .ifPresent(node -> {
+                    node.setNext(new Node(data));
+                    size++;
                 });
     }
 
@@ -58,15 +59,44 @@ public class SinglyLinkedList<T> {
 
     }
 
+    public boolean isPalindrome() {
+        if (isEmpty()) {
+            throw new RuntimeException("Empty!!!!");
+        }
+        final var stack = new Stack<T>();
+        Stream.iterate(head, Objects::nonNull, Node::getNext)
+                .limit(size)
+                .map(Node::getData)
+                .forEach(stack::push);
+
+        return Stream.iterate(head, Objects::nonNull, Node::getNext)
+                .limit(size)
+                .map(Node::getData)
+                .allMatch(e -> e.equals(stack.pop()));
+
+    }
+
+    public Node<T> midPoint() {
+        if (isEmpty()) {
+            throw new RuntimeException("Empty!!!!");
+        }
+        Node<T> slow = head, fast = head;
+        while (Objects.nonNull(fast) && Objects.nonNull(fast.getNext())) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+        return slow;
+    }
+
     public void printAll() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new RuntimeException("Empty!!!!");
         }
 
         Stream.iterate(head, Objects::nonNull, Node::getNext)
-              .limit(size)
-              .map(Node::getData)
-              .forEach(System.out::println);
+                .limit(size)
+                .map(Node::getData)
+                .forEach(System.out::println);
     }
 
     private static final class Node<T> {
@@ -93,6 +123,22 @@ public class SinglyLinkedList<T> {
         public void setNext(final Node<T> next) {
             this.next = next;
         }
+
+    }
+
+    public static void main(String[] args) throws Exception {
+        final var list = new SinglyLinkedList<String>();
+        list.addHead("A");
+        list.addHead("B");
+        list.addHead("C");
+        list.addHead("D");
+        list.addHead("E");
+
+        list.printAll();
+        list.reverse();
+        list.printAll();
+        System.out.println("mid point => " + list.midPoint().getData());
+        System.out.println("isPalindrome => " + list.isPalindrome());
 
     }
 
