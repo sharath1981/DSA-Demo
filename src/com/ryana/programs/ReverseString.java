@@ -82,8 +82,8 @@ public class ReverseString {
             return original;
         }
         return IntStream.range(0, original.length())
-                .mapToObj(original::charAt)
-                .map(String::valueOf)
+                .map(original::charAt)
+                .mapToObj(Character::toString)
                 .reduce("", (a, b) -> b + a);
     }
 
