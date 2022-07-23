@@ -74,7 +74,7 @@ public class ReverseString {
                 .mapToObj(original::charAt)
                 .forEach(stack::push);
         return Stream.generate(stack::pop).limit(original.length()).map(String::valueOf)
-                .collect(Collectors.joining(""));
+                .collect(Collectors.joining());
     }
 
     private static String reverse5(final String original) {
