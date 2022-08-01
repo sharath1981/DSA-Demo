@@ -14,6 +14,7 @@ public class Anagram {
         System.out.println(anagram2(str1, str2));
         System.out.println(anagram3(str1, str2));
         System.out.println(anagram4(str1, str2));
+        System.out.println(anagram5(str1, str2));
     }
 
     private static boolean anagram1(final String str1, final String str2) {
@@ -75,6 +76,19 @@ public class Anagram {
             counts[str1.charAt(i)]++;
             counts[str2.charAt(i)]--;
         }
+        return Arrays.stream(counts).allMatch(count -> count == 0);
+    }
+
+    private static boolean anagram5(String str1, String str2) {
+        if (isNotValid(str1, str2)) {
+            return false;
+        }
+        final var counts = new int[256];
+        str1 = str1.toLowerCase();
+        str2 = str2.toLowerCase();
+        str1.toLowerCase().chars().forEach(i -> ++counts[i]);
+        str2.toLowerCase().chars().forEach(i -> --counts[i]);
+
         return Arrays.stream(counts).allMatch(count -> count == 0);
     }
 }
