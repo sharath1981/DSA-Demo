@@ -32,7 +32,7 @@ public class LargestSmallestNumber {
                 .sorted(Comparator.reverseOrder())
                 .skip(1)
                 .findFirst()
-                .get();
+                .orElse(numbers[0]);
     }
 
     private static int findLargest(int[] numbers) {
