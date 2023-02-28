@@ -59,6 +59,19 @@ public class SinglyLinkedList<T> {
 
     }
 
+    public void reverse1() {
+        if (isEmpty()) {
+            throw new RuntimeException("Empty!!!!");
+        }
+        Stream.iterate(head, Objects::nonNull, Node::getNext)
+                .limit(size)
+                .forEach(x -> {
+                    final var next = x.getNext();
+                    x.setNext(null);
+                });
+
+    }
+
     public boolean isPalindrome() {
         if (isEmpty()) {
             throw new RuntimeException("Empty!!!!");

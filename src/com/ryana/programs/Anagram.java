@@ -84,8 +84,6 @@ public class Anagram {
             return false;
         }
         final var counts = new int[256];
-        str1 = str1.toLowerCase();
-        str2 = str2.toLowerCase();
         str1.toLowerCase().chars().forEach(i -> ++counts[i]);
         str2.toLowerCase().chars().forEach(i -> --counts[i]);
 
