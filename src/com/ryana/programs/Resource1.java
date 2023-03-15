@@ -12,12 +12,12 @@ public class Resource1 implements Cloneable {
     }
 
     // using static holder class
-    static final class Holder {
-        static final Resource1 INSTANCE = new Resource1();
+    private static final class Holder {
+        private static final Resource1 INSTANCE = new Resource1();
     }
 
-    // using holder interface
-    static interface Holder1 {
-        Resource1 INSTANCE = new Resource1();
+    public static Resource1 getInstance() {
+        return Holder.INSTANCE;
     }
+
 }
