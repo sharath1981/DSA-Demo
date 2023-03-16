@@ -53,10 +53,7 @@ public class DoublyLinkedList<E> {
     }
 
     public E removeFirst() {
-        if (isEmpty()) {
-            throw new EmptyStackException();
-        }
-        final var element = head.getElement();
+        final var element = getFirst();
         head = head.getNext();
         head.setPrev(null);
         size--;
@@ -64,10 +61,7 @@ public class DoublyLinkedList<E> {
     }
 
     public E removeLast() {
-        if (isEmpty()) {
-            throw new EmptyStackException();
-        }
-        final var element = tail.getElement();
+        final var element = getLast();
         tail = tail.getPrev();
         tail.setNext(null);
         size--;
