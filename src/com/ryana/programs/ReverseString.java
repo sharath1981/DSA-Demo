@@ -10,19 +10,20 @@ public class ReverseString {
 
     public static void main(final String[] args) {
         final var original = "original";
-        System.out.println(reverse(original));
-        System.out.println(reverse1(original));
-        System.out.println(reverse2(original));
-        System.out.println(reverse3(original));
-        System.out.println(reverse4(original));
-        System.out.println(reverse5(original));
-        System.out.println(reverse6(original));
+        if (isValid(original)) {
+            System.out.println(reverse(original));
+            System.out.println(reverse1(original));
+            System.out.println(reverse2(original));
+            System.out.println(reverse3(original));
+            System.out.println(reverse4(original));
+            System.out.println(reverse5(original));
+            System.out.println(reverse6(original));
+        } else {
+            System.out.println("Invalid String...");
+        }
     }
 
     private static String reverse(final String original) {
-        if (!isValid(original)) {
-            return original;
-        }
         final var chars = original.toCharArray();
         var reversed = "";
         for (final char ch : chars) {
@@ -32,9 +33,6 @@ public class ReverseString {
     }
 
     private static String reverse1(final String original) {
-        if (!isValid(original)) {
-            return original;
-        }
         final var reversed = new char[original.length()];
         for (int i = 0; i <= original.length() / 2; i++) {
             reversed[i] = original.charAt(original.length() - 1 - i);
@@ -44,18 +42,14 @@ public class ReverseString {
     }
 
     private static String reverse2(final String original) {
-        if (!isValid(original)) {
+        if (original.isBlank()) {
             return original;
         }
         return original.charAt(original.length() - 1)
                 + reverse2(original.substring(0, original.length() - 1));
-
     }
 
     private static String reverse3(final String original) {
-        if (!isValid(original)) {
-            return original;
-        }
         final var reversed = original.toCharArray();
         for (int i = 0; i <= reversed.length / 2; i++) {
             final var temp = reversed[i];
@@ -66,9 +60,6 @@ public class ReverseString {
     }
 
     private static String reverse4(final String original) {
-        if (!isValid(original)) {
-            return original;
-        }
         final var stack = new Stack<Character>();
         IntStream.range(0, original.length())
                 .mapToObj(original::charAt)
@@ -78,9 +69,6 @@ public class ReverseString {
     }
 
     private static String reverse5(final String original) {
-        if (!isValid(original)) {
-            return original;
-        }
         return IntStream.range(0, original.length())
                 .map(original::charAt)
                 .mapToObj(Character::toString)
@@ -88,9 +76,6 @@ public class ReverseString {
     }
 
     private static String reverse6(final String original) {
-        if (!isValid(original)) {
-            return original;
-        }
         return original.chars() // original.codePoints()
                 .mapToObj(Character::toString)
                 .reduce("", (a, b) -> b + a);
